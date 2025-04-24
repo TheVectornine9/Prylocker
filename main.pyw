@@ -14,7 +14,7 @@ except FileNotFoundError:
         
         
         root = tk.Tk()
-        root.withdraw()  # Hide the root window
+        root.withdraw()  
 
         def set_passcode():
             new_passcode = passcode_entry.get()
@@ -46,7 +46,7 @@ except FileNotFoundError:
         exit(0)
 
 
-def unlock():  # Removed unused _event parameter
+def unlock():  
     entered_passcode = entry.get()
     if entered_passcode == CORRECT_PASSCODE:
         for win in windows:
@@ -56,16 +56,15 @@ def unlock():  # Removed unused _event parameter
         entry.delete(0, tk.END)
 
 def block_close():
-    pass  # Prevent window close
+    pass  
 
 def block_keys():
     return "break"
 
 def alt_f4_guard(event):
-    if event.keysym == 'F4' and (event.state & 0x0008):  # Alt is held
+    if event.keysym == 'F4' and (event.state & 0x0008):  
         return "break"
 
-# Create a fullscreen lock window on each monitor
 for i, m in enumerate(get_monitors()):
     win = tk.Tk()
     win.overrideredirect(True)
@@ -87,7 +86,7 @@ for i, m in enumerate(get_monitors()):
         entry = tk.Entry(win, show="*", font=("Arial", 24), justify="center")
         entry.pack()
         entry.focus_set()
-        entry.bind("<Return>", unlock)  # ✅ Bind Enter key to unlock
+        entry.bind("<Return>", unlock) 
 
         btn = tk.Button(win, text="Unlock", font=("Arial", 20), command=unlock)
         btn.pack(pady=20)
